@@ -1,3 +1,15 @@
+require 'securerandom'
+
+class Player
+
+	def initialize (name=SecureRandom.urlsafe_base64(5), health=rand(200))
+		@name = name.capitalize
+		@health = health
+	end
+
+end
+
+
 def time
 	Time.now.strftime "%H:%M:%S" 
 end
@@ -34,3 +46,6 @@ players.each do |player,health|
 		puts say_hello player 
 	end
 end
+
+player1 = Player.new
+puts player1.inspect
