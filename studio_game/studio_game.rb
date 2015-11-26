@@ -12,6 +12,15 @@ class Player
         	"I'm #{@name} with health #{@health} as of #{time}"
 	end
 
+	def blam()
+		@health -= 10
+		"#{@name} got blammed!"
+	end
+
+	def w00t()
+		@health += 15
+		"#{@name} got w00ted!"
+	end
 
 end
 
@@ -42,10 +51,21 @@ players=[["larry",60],["curly",120],["moe",100],["shemp",90],["dani"]]
 
 print_players(players)
 
-players.each do |player,health|
-	player = Player.new(player,health)
+players.each do |name,health|
+	player = Player.new(name,health)
 	puts player.say_hello 
-	puts player.inspect
+	if (rand(1..2)==1)
+	puts "this user was lucky... time to play with it!"
+		rand(1..10).times do
+			case rand(1..2)
+				when 1
+				 puts player.blam 
+				else
+				 puts player.w00t
+			end
+		end
+	puts player.say_hello 
+	end
 end
 
 player1 = Player.new
