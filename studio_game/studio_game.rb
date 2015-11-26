@@ -45,7 +45,10 @@ players.each do |player,health|
 	else 
 		puts say_hello player 
 	end
+	player = Player.new(player,health)
+	puts player.inspect
 end
 
 player1 = Player.new
 puts player1.inspect
+
