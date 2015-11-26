@@ -8,7 +8,7 @@ class Player
 		@health=rand(200) if health.nil? == true 
 	end
 
-	def say_hello()
+	def to_s()
         	"I'm #{@name} with health #{@health} as of #{time}"
 	end
 
@@ -53,7 +53,7 @@ print_players(players)
 
 players.each do |name,health|
 	player = Player.new(name,health)
-	puts player.say_hello 
+	puts player 
 	if (rand(1..2)==1)
 	puts "this user was lucky... time to play with it!"
 		rand(1..10).times do
@@ -64,7 +64,7 @@ players.each do |name,health|
 				 puts player.w00t
 			end
 		end
-	puts player.say_hello 
+	puts player 
 	end
 end
 
