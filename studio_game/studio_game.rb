@@ -4,18 +4,19 @@ class Player
 
 	def initialize (name=SecureRandom.urlsafe_base64(5), health=rand(200))
 		@name = name.capitalize
-		@health = health
+		@health = health 
+		@health=rand(200) if health.nil? == true 
 	end
 
-end
+	def say_hello()
+        	"I'm #{@name} with health #{@health} as of #{time}"
+	end
 
+
+end
 
 def time
 	Time.now.strftime "%H:%M:%S" 
-end
-
-def say_hello(name,health=100)
-	"I'm #{name.capitalize} with health #{health} as of #{time}"
 end
 
 
@@ -37,15 +38,13 @@ def print_players(players)
 end
 
 
-players=[["larry",60],["curly",120],["moe",100],["shemp",90],"dani"]
+players=[["larry",60],["curly",120],["moe",100],["shemp",90],["dani"]]
+
+print_players(players)
 
 players.each do |player,health|
-	if !health.nil? then
-		puts say_hello(player,health) 
-	else 
-		puts say_hello player 
-	end
 	player = Player.new(player,health)
+	puts player.say_hello 
 	puts player.inspect
 end
 
