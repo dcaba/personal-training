@@ -1,6 +1,8 @@
 require 'securerandom'
 
 class Player
+attr_reader :health
+attr_accessor :name
 
 	def initialize (name=SecureRandom.urlsafe_base64(5), health=rand(200))
 		@name = name.capitalize
@@ -8,8 +10,12 @@ class Player
 		@health=rand(200) if health.nil? == true 
 	end
 
+	def score
+		@health + name.size
+	end
+
 	def to_s()
-        	"I'm #{@name} with health #{@health} as of #{time}"
+        	"I'm #{@name} with health #{@health} and an score of #{score} as of #{time}"
 	end
 
 	def blam()
@@ -55,7 +61,7 @@ players.each do |name,health|
 	player = Player.new(name,health)
 	puts player 
 	if (rand(1..2)==1)
-	puts "this user was lucky... time to play with it!"
+	puts "---this user was lucky... time to play with it!"
 		rand(1..10).times do
 			case rand(1..2)
 				when 1
@@ -70,4 +76,6 @@ end
 
 player1 = Player.new
 puts player1.inspect
-
+puts player1.health
+player1.name = player1.name+"oz"
+puts player1
