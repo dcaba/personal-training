@@ -38,50 +38,66 @@ end
 def print_players(players,scope="all") 
 	case scope
 	when "all"
+		puts "*************"
+		puts "Players information"
+		puts "*************"
 		players.each do |player|
-       			case player[0]
+       			case player.name.downcase
        			when "larry"
-      				puts "\t #{player[0].capitalize} has a health of #{player[1]}."
+      				puts "\t #{player.name.capitalize} has a health of #{player.health}."
        			when "curly"
-               			puts "\t #{player[0].upcase} has a health of #{player[1]}."
+               			puts "\t #{player.name.upcase} has a health of #{player.health}."
 			when "moe"
-       				puts "\t "+"#{player[0].capitalize} has a health of #{player[1]}.".center(40,"*")
+       				puts "\t "+"#{player.name.capitalize} has a health of #{player.health}.".center(40,"*")
 			when "shemp"
-               			puts "\t #{player[0].capitalize.ljust(20,".")} health #{player[1]}."
+               			puts "\t #{player.name.capitalize.ljust(20,".")} health #{player.health}."
        			else
-       				puts "\t #{player[0]} \n"
+       				puts "\t #{player.name} \n"
        			end
 		end 
 	when "health" 
+		puts "*************"
 		puts "Health report"
+		puts "*************"
+		players.each do |player|
+			puts player.health
+		end
 	end
+end
+
+def play(players)
+players.each do |player|
+        if (rand(1..2)==1)
+	        puts "---user #{player.name} was lucky... time to play with it!"
+		puts "Before playing: #{player}"
+                rand(1..10).times do
+                        case rand(1..2)
+                                when 1
+                                 puts player.blam
+                                else
+                                 puts player.w00t
+                        end
+                end
+		puts "After playing: #{player}"
+        end
+end
 end
 
 
 players_data=[["larry",60],["curly",120],["moe",100],["shemp",90],["dani"]]
-print_players(players_data)
-
 players = Array.new
 
 players_data.each do |name,health|
 	player = Player.new(name,health)
 	players << player
 	puts "player has been processed: #{player}"
-	if (rand(1..2)==1)
-	puts "---this user was lucky... time to play with it!"
-		rand(1..10).times do
-			case rand(1..2)
-				when 1
-				 puts player.blam 
-				else
-				 puts player.w00t
-			end
-		end
-	end
 end
+puts "Players have been imported. There are #{players.size} players in the game"
 
-puts "Players have been parsed. There are #{players.size} players in the game"
+print_players(players)
+print_players(players,"health")
 
-players.each do |player|
-	puts player
-end
+play(players)
+
+print_players(players)
+print_players(players,"health")
