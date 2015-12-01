@@ -35,31 +35,38 @@ def time
 end
 
 
-def print_players(players) 
-	players.each do |player|
-        	case player[0]
-        		when "larry"
-                		puts "\t #{player[0].capitalize} has a health of #{player[1]}."
-        		when "curly"
-                		puts "\t #{player[0].upcase} has a health of #{player[1]}."
+def print_players(players,scope="all") 
+	case scope
+	when "all"
+		players.each do |player|
+       			case player[0]
+       			when "larry"
+      				puts "\t #{player[0].capitalize} has a health of #{player[1]}."
+       			when "curly"
+               			puts "\t #{player[0].upcase} has a health of #{player[1]}."
 			when "moe"
-                		puts "\t "+"#{player[0].capitalize} has a health of #{player[1]}.".center(40,"*")
+       				puts "\t "+"#{player[0].capitalize} has a health of #{player[1]}.".center(40,"*")
 			when "shemp"
-                		puts "\t #{player[0].capitalize.ljust(20,".")} health #{player[1]}."
-        		else
-                		puts "\t #{player[0]} \n"
-        	end
+               			puts "\t #{player[0].capitalize.ljust(20,".")} health #{player[1]}."
+       			else
+       				puts "\t #{player[0]} \n"
+       			end
+		end 
+	when "health" 
+		puts "Health report"
 	end
 end
 
 
-players=[["larry",60],["curly",120],["moe",100],["shemp",90],["dani"]]
+players_data=[["larry",60],["curly",120],["moe",100],["shemp",90],["dani"]]
+print_players(players_data)
 
-print_players(players)
+players = Array.new
 
-players.each do |name,health|
+players_data.each do |name,health|
 	player = Player.new(name,health)
-	puts player 
+	players << player
+	puts "player has been processed: #{player}"
 	if (rand(1..2)==1)
 	puts "---this user was lucky... time to play with it!"
 		rand(1..10).times do
@@ -70,12 +77,11 @@ players.each do |name,health|
 				 puts player.w00t
 			end
 		end
-	puts player 
 	end
 end
 
-player1 = Player.new
-puts player1.inspect
-puts player1.health
-player1.name = player1.name+"oz"
-puts player1
+puts "Players have been parsed. There are #{players.size} players in the game"
+
+players.each do |player|
+	puts player
+end
