@@ -101,3 +101,11 @@ play(players)
 
 print_players(players)
 print_players(players,"health")
+
+players.reject! do |player|
+	player.name.downcase == "curly"
+end
+
+players << Player.new("ShemP2")
+
+print_players(players)
