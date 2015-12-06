@@ -30,18 +30,24 @@ attr_accessor :name
 
 end
 
-def time
-	Time.now.strftime "%H:%M:%S" 
+class Game
+attr_accessor :players,:name
+
+def initialize(name)
+	@name = name
 end
 
+def import_players(players_import)
+	@players = players_import.clone
+end
 
-def print_players(players,scope="all") 
+def print_players(scope="all") 
 	case scope
 	when "all"
 		puts "*************"
 		puts "Players information"
 		puts "*************"
-		players.each do |player|
+		@players.each do |player|
        			case player.name.downcase
        			when "larry"
       				puts "\t #{player.name.capitalize} has a health of #{player.health}."
@@ -59,14 +65,14 @@ def print_players(players,scope="all")
 		puts "*************"
 		puts "Health report"
 		puts "*************"
-		players.each do |player|
+		@players.each do |player|
 			puts player.health
 		end
 	end
 end
 
-def play(players)
-players.each do |player|
+def play
+@players.each do |player|
         if (rand(1..2)==1)
 	        puts "---user #{player.name} was lucky... time to play with it!"
 		puts "Before playing: #{player}"
@@ -83,6 +89,12 @@ players.each do |player|
 end
 end
 
+end
+
+def time
+        Time.now.strftime "%H:%M:%S"
+end
+
 
 players_data=[["larry",60],["curly",120],["moe",100],["shemp",90],["dani"]]
 players = Array.new
@@ -92,15 +104,20 @@ players_data.each do |name,health|
 	players << player
 	puts "player has been processed: #{player}"
 end
-puts "Players have been imported. There are #{players.size} players in the game"
 
-print_players(players)
-print_players(players,"health")
+my_game = Game.new "myGame!"
+my_game.import_players(players)
 
-play(players)
+puts "Players have been imported. There are #{my_game.players.size} players in the game"
 
-print_players(players)
-print_players(players,"health")
+puts "Game title: #{my_game.name}"
+my_game.print_players
+my_game.print_players("health")
+
+my_game.play
+
+my_game.print_players
+my_game.print_players("health")
 
 players.reject! do |player|
 	player.name.downcase == "curly"
@@ -108,4 +125,6 @@ end
 
 players << Player.new("ShemP2")
 
-print_players(players)
+my_game.print_players
+my_game.import_players(players)
+my_game.print_players
