@@ -28,6 +28,10 @@ class Player
 		"#{@name} got w00ted!"
 	end
 
+	def strong?
+		@health > 100
+	end
+
 end
 
 def time
