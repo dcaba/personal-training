@@ -1,4 +1,6 @@
 require_relative 'player'
+require_relative 'die'
+
 class Game
 	attr_accessor :players,:title
 
@@ -7,12 +9,21 @@ class Game
 		@players = Array.new
 	end
 
-	def add_player(player)
+	def add_player(player=Player.new)
 		@players << player
 	end
 
 	def import_players(players_import)
 		@players = players_import.clone
+	end
+
+	def get_player_by_name(name)
+		players_with_name = @players.select {|player| player.name.downcase == name.downcase}
+		players_with_name.first
+	end
+	
+	def winner
+		@players.sort {|x,y| y.score <=> x.score}.first 
 	end
 
 	def print_players(scope="all") 
@@ -43,20 +54,18 @@ class Game
 
 	def play
 		puts "Now we are playing with #{title} and #{players.size} players".center(80,"*")
+		die = Die.new
 		@players.each do |player|
-			if (rand(1..2)==1)
-				puts "-user #{player.name} was lucky... time to play with it!"
-				puts "-Before playing: #{player}"
-				rand(1..10).times do
-					case rand(1..2)
-					when 1
-						puts "\t"+player.blam
-					else
-						puts "\t"+player.w00t
-					end
+			puts "-Before playing: #{player}"
+			case die.roll
+				when 1..2
+					puts "\t"+player.blam
+				when 5..6
+					puts "\t"+player.w00t
+				else
+					puts "\tPlayer #{player.name} skipped"
 				end
-				puts "-After playing: #{player}"
-			end
+			puts "-After playing: #{player}"
 		end
 	end
 
