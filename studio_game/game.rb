@@ -1,5 +1,5 @@
 require_relative 'player'
-require_relative 'die'
+require_relative 'game_turn'
 
 class Game
 	attr_accessor :players,:title
@@ -54,17 +54,9 @@ class Game
 
 	def play
 		puts "Now we are playing with #{title} and #{players.size} players".center(80,"*")
-		die = Die.new
 		@players.each do |player|
 			puts "-Before playing: #{player}"
-			case die.roll
-				when 1..2
-					puts "\t"+player.blam
-				when 5..6
-					puts "\t"+player.w00t
-				else
-					puts "\tPlayer #{player.name} skipped"
-				end
+			GameTurn.take_turn(player)
 			puts "-After playing: #{player}"
 		end
 	end
