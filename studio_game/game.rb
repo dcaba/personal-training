@@ -55,7 +55,7 @@ class Game
 	def play(rounds=1)
 		puts "Now we are playing with #{title} and #{players.size} players".center(80,"*")
 		rounds.times do |round|
-			puts "Round number: #{round}"
+			puts "Round number: #{round+1}"
 			@players.each do |player|
 				puts "-Before playing: #{player}"
 				GameTurn.take_turn(player)

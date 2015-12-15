@@ -37,6 +37,7 @@ end
 #
 players = initialize_program
 
+# GAME 1
 my_game = Game.new "myGame!"
 my_game.import_players(players)
 puts "Players have been imported. There are #{my_game.players.size} players in the game"
@@ -52,7 +53,10 @@ my_game.print_players("health")
 my_game.play
 
 puts "The winner of #{my_game.title} was... #{my_game.winner}".center(160,"*")
+
+# GAME 2
 my_game2 = Game.new "Game with tens of players"
+
 puts "Adding random players"
 rand(50..150).times do
 	my_game2.add_player
@@ -61,7 +65,7 @@ puts "Done"
 
 puts "Game title: #{my_game2.title}"
 my_game2.print_players
-my_game2.play
+my_game2.play rand(1..5)
 puts "The winner of #{my_game2.title} was... #{my_game2.winner}".center(160,"*")
 
 finish_program
