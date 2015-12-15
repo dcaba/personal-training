@@ -21,7 +21,7 @@ class Game
 		players_with_name = @players.select {|player| player.name.downcase == name.downcase}
 		players_with_name.first
 	end
-	
+
 	def winner
 		@players.sort {|x,y| y.score <=> x.score}.first 
 	end
@@ -52,12 +52,15 @@ class Game
 		end
 	end
 
-	def play
+	def play(rounds=1)
 		puts "Now we are playing with #{title} and #{players.size} players".center(80,"*")
-		@players.each do |player|
-			puts "-Before playing: #{player}"
-			GameTurn.take_turn(player)
-			puts "-After playing: #{player}"
+		rounds.times do |round|
+			puts "Round number: #{round}"
+			@players.each do |player|
+				puts "-Before playing: #{player}"
+				GameTurn.take_turn(player)
+				puts "-After playing: #{player}"
+			end
 		end
 	end
 

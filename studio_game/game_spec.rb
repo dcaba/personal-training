@@ -39,6 +39,17 @@ describe Game do
 		expect(tested_player.health).to be == @initial_health 
 	end
 
+	it "also introduces the changes properly in a multiround game" do
+		allow_any_instance_of(Die).to receive(:roll).and_return(5)
+		@game.play 2
+		allow_any_instance_of(Die).to receive(:roll).and_return(1)
+		@game.play 2
+		allow_any_instance_of(Die).to receive(:roll).and_return(3)
+		@game.play 4
+		tested_player = @game.get_player_by_name("moe")
+		expect(tested_player.health).to be == @initial_health + 15*2 - 10*2
+	end
+
 	context "with an strong and wimpy player" do
 		before do
 			@game = Game.new("Tongo game")
