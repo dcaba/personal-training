@@ -52,12 +52,12 @@ class Game
 		end
 	end
 	def print_stats
-		message="#{@title} statistics:\n"
+		message="#{@title} Statistics:\n"
 		strong,wimpy=@players.partition{|x| x.strong?}
 		message << "\n#{strong.size} strong players:\n"
-		strong.each {|player| message < "\t#{player.name}(#{player.health})\n"}
+		strong.each {|player| message << "\t#{player.name} (#{player.health})\n"}
 		message << "\n#{wimpy.size} wimpy players:\n"
-		wimpy.each {|player| message << "\t#{player.name}(#{player.health})\n"}
+		wimpy.each {|player| message << "\t#{player.name} (#{player.health})\n"}
 		return message
 	end
 
@@ -71,6 +71,7 @@ class Game
 				puts "-After playing: #{player}"
 			end
 		end
+		puts print_stats
 	end
 
 end
