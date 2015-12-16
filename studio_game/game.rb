@@ -51,6 +51,15 @@ class Game
 			end
 		end
 	end
+	def print_stats
+		message="#{@title} statistics:\n"
+		strong,wimpy=@players.partition{|x| x.strong?}
+		message << "\n#{strong.size} strong players:\n"
+		strong.each {|player| message < "\t#{player.name}(#{player.health})\n"}
+		message << "\n#{wimpy.size} wimpy players:\n"
+		wimpy.each {|player| message << "\t#{player.name}(#{player.health})\n"}
+		return message
+	end
 
 	def play(rounds=1)
 		puts "Now we are playing with #{title} and #{players.size} players".center(80,"*")

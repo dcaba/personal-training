@@ -60,6 +60,11 @@ describe Game do
 		it "prints the winner properly" do
 			expect(@game.winner.name.downcase).to be == "winner"
 		end
+
+		it "prints the status properly" do
+			expected_stats="Tongo game Statistics:\n\n1 strong players:\n\tWinner (2000)\n\n1 wimpy players:\n\tLoser (1)"
+			expect(@game.print_stats).to be == expected_stats
+		end
 	end
 
 
