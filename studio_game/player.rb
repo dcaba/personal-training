@@ -4,7 +4,7 @@ class Player
 	attr_reader :health
 	attr_accessor :name
 
-	def initialize (name=SecureRandom.urlsafe_base64(5), health=rand(200))
+	def initialize (name=SecureRandom.urlsafe_base64(5), health=rand(1..200))
 		@name = name.capitalize
 		@health = health 
 		@health=rand(200) if health.nil? == true 
@@ -30,6 +30,10 @@ class Player
 
 	def strong?
 		@health > 100
+	end
+	def <=>(x)
+		x.score <=> score
+		
 	end
 
 end

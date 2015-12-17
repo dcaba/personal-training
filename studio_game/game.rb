@@ -51,13 +51,24 @@ class Game
 			end
 		end
 	end
-	def print_stats
+	def report_strong_wimpy
 		message="#{@title} Statistics:\n"
 		strong,wimpy=@players.partition{|x| x.strong?}
 		message << "\n#{strong.size} strong players:\n"
 		strong.each {|player| message << "\t#{player.name} (#{player.health})\n"}
 		message << "\n#{wimpy.size} wimpy players:\n"
 		wimpy.each {|player| message << "\t#{player.name} (#{player.health})\n"}
+		return message
+	end
+	def report_high_scores
+		message="#{@title} High Scores:\n"
+		players.sort.each {|player| message << "\t"+"#{player.name}".ljust(20,".")+" #{player.health}\n"}
+		return message
+	end
+
+	def print_stats
+		message=report_strong_wimpy
+		message << report_high_scores 
 		return message
 	end
 
