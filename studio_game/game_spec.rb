@@ -62,7 +62,7 @@ describe Game do
 		end
 
 		it "prints the status properly" do
-			expected_stats="Tongo game Statistics:\n\n1 strong players:\n\tWinner (2000)\n\n1 wimpy players:\n\tLoser (1)\n"
+			expected_stats="Tongo game Statistics:\n\n1 strong players:\n\tWinner.............. 2000\n\n1 wimpy players:\n\tLoser............... 1\n"
 			expected_stats << "Tongo game High Scores:\n\tWinner.............. 2000\n\tLoser............... 1\n"
 			expect(@game.print_stats).to be == expected_stats
 		end
