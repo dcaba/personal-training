@@ -14,6 +14,10 @@ describe Treasure do
 		expect(@treasure.points).to be == 50
 	end
 
+	it "can be printed" do
+		expect(@treasure.to_s).to be == "treasure hammer worth 50 points"
+	end
+
 end
 
 describe TreasureTrove do

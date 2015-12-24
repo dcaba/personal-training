@@ -79,11 +79,11 @@ class Game
 	end
 
 	def play(rounds=1)
-		puts "Starting to play!".center(40,"*")+"\n"
+		puts "Starting to play!".center(80,"*")+"\n"
 		puts "Treasures recollection"
 		treasures=TreasureTrove::TREASURES
 		puts "Counting on the following #{treasures.size} treasures:"
-		treasures.each {|treasure| puts "\t#{treasure.name} with #{treasure.points} points"}
+		treasures.each {|treasure| puts "\t#{treasure}"}
 		puts "Now we are playing with #{title} and #{players.size} players".center(80,"*")
 		rounds.times do |round|
 			puts "Round number: #{round+1}"
@@ -94,7 +94,7 @@ class Game
 			end
 		end
 		puts print_stats
-		puts "Play finished!".center(40,"*")+"\n"
+		puts "Play finished!".center(80,"*")+"\n"
 	end
 
 end

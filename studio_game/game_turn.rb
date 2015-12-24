@@ -1,5 +1,6 @@
 require_relative 'die'
 require_relative 'player'
+require_relative 'treasure_trove'
 
 module GameTurn
 	def self.take_turn(player)
@@ -12,6 +13,11 @@ module GameTurn
 		else
 			puts "\tPlayer #{player.name} skipped"
 		end
+		treasure_mgmt(player)
+	end
+	def self.treasure_mgmt(player)
+		found_treasure = TreasureTrove::random
+		puts "\t#{player.name} found a #{found_treasure}"	
 	end
 end
 

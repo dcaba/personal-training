@@ -1,4 +1,9 @@
 Treasure = Struct.new(:name,:points)
+class Treasure
+	def to_s
+		"treasure #{name} worth #{points} points"
+	end
+end
 module TreasureTrove
 	TREASURES = [
 	      Treasure.new(:pie,5),
