@@ -15,14 +15,15 @@ class Player
 	def found_treasure(treasure)
 		 @found_treasures[treasure.name] += treasure.points
 		 puts "#{name} found a #{treasure}"
+		 puts "#{name} treasures:#{@found_treasures}"
 	end
 
 	def score
-		@health + name.size
+		@health + points
 	end
 
 	def to_s()
-		"I'm #{@name} with health #{@health} and an score of #{score} as of #{time}"
+		"I'm #{@name} with health = #{@health}, points = #{points}, and score = #{score} as of #{time}"
 	end
 
 	def blam()

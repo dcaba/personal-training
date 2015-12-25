@@ -17,7 +17,7 @@ module GameTurn
 	end
 	def self.treasure_mgmt(player)
 		found_treasure = TreasureTrove::random
-		puts "\t#{player.name} found a #{found_treasure}"	
+		player.found_treasure(found_treasure)
 	end
 end
 

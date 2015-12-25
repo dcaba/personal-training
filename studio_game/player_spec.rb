@@ -5,6 +5,7 @@ describe Player do
 	context "with auto health" do
 		before do
 			@player = Player.new("dani")
+			@health = @player.health
 		end
 
 		it "has a capitalized name" do
@@ -18,15 +19,22 @@ describe Player do
 		it "has a string representation" do
 			expect(@player.to_s).not_to be nil
 		end
+		it "has a proper string representation" do
+			@player.found_treasure(Treasure.new(:hammer, 50))
+			@player.found_treasure(Treasure.new(:hammer, 50))
+			expect(@player.to_s).to include "I'm Dani with health = #{@health}, points = 100, and score = #{@health+100}"
+		end
+
 	end
 	context "with a high static health" do
 		before do
 			@initial_health=150
 			@player = Player.new("dani",@initial_health)
 		end
-
-		it "computes a score as the sum of its health and length of name" do
-			expect(@player.score).to be == "Dani".size + @initial_health 
+		it "computes a score as the sum of its health and points" do
+			@player.found_treasure(Treasure.new(:hammer, 50))
+			@player.found_treasure(Treasure.new(:hammer, 50))
+			expect(@player.score).to be == @initial_health + 100 
 		end
 
 		it "increases health by 15 when w00ted" do

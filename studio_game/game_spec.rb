@@ -49,6 +49,17 @@ describe Game do
 		tested_player = @game.get_player_by_name("moe")
 		expect(tested_player.health).to be == @initial_health + 15*2 - 10*2
 	end
+	it "assigns a treasure for points during a player's turn" do
+		game = Game.new("Knuckleheads")
+		player = Player.new("moe")
+
+		game.add_player(player)
+
+		game.play(1)
+
+		expect(player.points).not_to be_zero
+	end
+
 
 	context "with an strong and wimpy player" do
 		before do
