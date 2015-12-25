@@ -1,4 +1,5 @@
 require 'securerandom'
+require_relative 'treasure_trove'
 
 class Player
 	attr_reader :health
@@ -8,6 +9,12 @@ class Player
 		@name = name.capitalize
 		@health = health 
 		@health=rand(200) if health.nil? == true 
+		@found_treasures = Hash.new(0)
+	end
+
+	def found_treasure(treasure)
+		 @found_treasures[treasure.name] += treasure.points
+		 puts "#{name} found a #{treasure}"
 	end
 
 	def score
@@ -33,7 +40,9 @@ class Player
 	end
 	def <=>(x)
 		x.score <=> score
-		
+	end
+	def points
+		@found_treasures.values.reduce(0,:+)
 	end
 
 end

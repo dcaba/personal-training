@@ -1,4 +1,5 @@
 require_relative 'player'
+require_relative 'treasure_trove'
 
 describe Player do
 	context "with auto health" do
@@ -39,6 +40,21 @@ describe Player do
 		end
 		it "is strong" do
 			expect(@player).to be_strong
+		end
+		it "computes points as the sum of all treasure points" do
+			expect(@player.points).to be == 0
+
+			@player.found_treasure(Treasure.new(:hammer, 50))
+
+			expect(@player.points).to be == 50
+
+			@player.found_treasure(Treasure.new(:crowbar, 400))
+
+			expect(@player.points).to be == 450
+
+			@player.found_treasure(Treasure.new(:hammer, 50))
+
+			expect(@player.points).to be == 500
 		end
 	end
 	context "with a low static health" do
