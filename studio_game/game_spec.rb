@@ -75,6 +75,7 @@ describe Game do
 		it "prints the status properly" do
 			expected_stats="Tongo game Statistics:\n\n1 strong players:\n\tWinner.............. 2000\n\n1 wimpy players:\n\tLoser............... 1\n"
 			expected_stats << "Tongo game High Scores:\n\tWinner.............. 2000\n\tLoser............... 1\n"
+			expected_stats << "Tongo game Total points:\n\tWinner's point totals:\n\t\t0 grand total points\n\tLoser's point totals:\n\t\t0 grand total points\n"
 			expect(@game.print_stats).to be == expected_stats
 		end
 	end

@@ -54,8 +54,12 @@ class Game
 	end
 	def print_player_health(player)
 		"\t"+"#{player.name}".ljust(20,".")+" #{player.health}\n"
-
 	end
+
+	def print_player_score(player)
+		"\t"+"#{player.name}".ljust(20,".")+" #{player.score}\n"
+	end
+
 	def report_strong_wimpy
 		message="#{@title} Statistics:\n"
 		strong,wimpy=@players.partition{|x| x.strong?}
@@ -67,7 +71,12 @@ class Game
 	end
 	def report_high_scores
 		message="#{@title} High Scores:\n"
-		players.sort.each {|player| message << print_player_health(player)}
+		players.sort.each {|player| message << print_player_score(player)}
+		return message
+	end
+	def report_total_points
+		message="#{@title} Total points:\n"
+		@players.each { |player| message << "\t#{player.name}'s point totals:\n\t\t#{player.points} grand total points\n" } 
 		return message
 	end
 
@@ -75,6 +84,7 @@ class Game
 		message = String.new
 		message << report_strong_wimpy
 		message << report_high_scores 
+		message << report_total_points
 		return message
 	end
 
