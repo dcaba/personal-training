@@ -17,6 +17,8 @@ class Player
 		 puts "#{name} found a #{treasure}"
 		 puts "#{name} treasures:#{@found_treasures}"
 	end
+	def each_found_treasure
+	end
 
 	def score
 		@health + points
