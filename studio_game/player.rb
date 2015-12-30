@@ -18,6 +18,9 @@ class Player
 		 puts "#{name} treasures:#{@found_treasures}"
 	end
 	def each_found_treasure
+		@found_treasures.each do |key,value|
+			yield Treasure.new(key,value)
+		end
 	end
 
 	def score

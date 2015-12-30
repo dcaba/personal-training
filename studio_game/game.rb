@@ -74,9 +74,21 @@ class Game
 		players.sort.each {|player| message << print_player_score(player)}
 		return message
 	end
+	def report_per_treasure_points(player)
+		message = String.new
+		player.each_found_treasure do |treasure|
+			message << "#{treasure.name} total #{treasure.points} points\n"	
+		end
+		return message
+	end
 	def report_total_points
 		message="#{@title} Total points:\n"
-		@players.each { |player| message << "\t#{player.name}'s point totals:\n\t\t#{player.points} grand total points\n" } 
+		@players.each { |player| 
+			message << "\t#{player.name}'s point totals:\n"
+			rptr = report_per_treasure_points(player)
+			(rptr.lines.each { |line| message << "\t\t" + line}) unless rptr.size == 0
+		  	message << "\t\t#{player.points} grand total points\n" 
+		} 
 		return message
 	end
 
