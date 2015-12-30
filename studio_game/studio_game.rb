@@ -1,12 +1,30 @@
 require_relative 'player'
 require_relative 'game'
 
+def prompt_user_data
+	loop do
+		puts "How many game rounds? ('quit' to exit)"
+		answer = gets.chomp.downcase
+		case answer
+		when /^\d+$/
+			puts "valid number"
+		when "quit" || "exit"
+			break
+		else
+			puts "Please enter a number or 'quit'"
+		end
+
+	end
+end
+
 def initialize_program
 	$init_time = Time.now	
 	welcome_message="Game starting at #{time}"
 	puts "".center(80,"#")
 	puts welcome_message.center(80,"#")
 	puts "".center(80,"#")
+
+	prompt_user_data
 
 	players_data=[["larry",60],["curly",120],["moe",100],["shemp",90],["dani"]]
 	players = Array.new
