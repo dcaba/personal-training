@@ -80,5 +80,32 @@ describe Game do
 		end
 	end
 
+	context "from an imported array of players" do
+		before do
+			@players_data=[["larry",60],["curly",120],["moe",100],["shemp",90],["dani"]]
+			players = Array.new
+			@players_data.each do |name,health|
+				player = Player.new(name,health)
+				players << player
+			end
+			@game = Game.new "test game"
+			@game.load_players(players)
+		end
+		it "should contain the expected number of players" do
+			expect(@game.players.size).to be == @players_data.size
+		end
+	end
+
+	context "from an imported csv of players" do
+		before do
+			@player_file="game_spec_players.csv"
+			@game.load_players(@player_file)
+		end
+		it "should contain the expected number of players" do
+			expect(@game.players.size).to be == `wc -l #{@player_file}`.to_i
+		end
+	end
+
+
 
 end

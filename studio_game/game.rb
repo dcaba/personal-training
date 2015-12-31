@@ -14,7 +14,7 @@ class Game
 		@players << player
 	end
 
-	def import_players(players_import)
+	def load_players(players_import)
 		@players = players_import.clone
 	end
 
