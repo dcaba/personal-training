@@ -1,17 +1,17 @@
 require_relative 'player'
 require_relative 'game'
 
-def play_user_rounds
+def play_user_rounds(csv_param)
 	loop do
 		puts "How many game rounds? ('quit' to exit)"
 		answer = gets.chomp.downcase
 		case answer
 		when /^\d+$/
 			rounds = answer.to_i
-			game1 rounds
-		       	game2 rounds
-			game3 rounds
-		when "quit","exit"
+			$games << game1(rounds)
+		       	$games << game2(rounds)
+			$games << game3(rounds,csv_param)
+		when "quit","exit","q"
 			break
 		else
 			puts "Please enter a number or 'quit'"
@@ -20,9 +20,11 @@ def play_user_rounds
 	end
 end
 
-def initialize_program
+def initialize_program(csv_param)
 	$init_time = Time.now	
-	welcome_message="Game starting at #{time}"
+	csv_param << (ARGV.shift || "players.csv")
+	$games = Array.new
+	welcome_message="Game starting at #{time} - invoked with #{csv_param}"
 	puts "".center(80,"#")
 	puts welcome_message.center(80,"#")
 	puts "".center(80,"#")
@@ -30,10 +32,12 @@ end
 
 
 def finish_program
-	bye_message="Game finished at #{time}"
+	bye_message="Game finished at #{time}...saving stats"
 	puts "".center(80,"#")
 	puts bye_message.center(80,"#")
 	puts "".center(80,"#")
+	$games.each {|game| game.save_high_scores "#{game.title}.out"}
+	puts "stats saved"
 	puts "EXECUTION TIME: #{((Time.now - $init_time)*1000000).to_i} micro-seconds"
 end
 
@@ -70,6 +74,7 @@ def game1(rounds=1)
 	my_game.play rounds
 
 	puts "The winner of #{my_game.title} was... #{my_game.winner}".center(160,"*")
+	return my_game
 end
 
 def game2(rounds=1)
@@ -85,12 +90,12 @@ def game2(rounds=1)
 	my_game2.print_players
 	my_game2.play rounds
 	puts "The winner of #{my_game2.title} was... #{my_game2.winner}".center(160,"*")
+	return my_game2
 end
 
-def game3(rounds=1)
-	players='players.csv'
+def game3(rounds=1,player_file)
 	my_game = Game.new "csv game!"
-	my_game.load_players(players)
+	my_game.load_players(player_file)
 	puts "Players have been imported. There are #{my_game.players.size} players in the game"
 
 	puts "Game title: #{my_game.title}"
@@ -99,11 +104,13 @@ def game3(rounds=1)
 	my_game.play rounds
 
 	puts "The winner of #{my_game.title} was... #{my_game.winner}".center(160,"*")
+	return my_game
 end
 
 #
 # MAIN
 #
-initialize_program
-play_user_rounds
+csv_param = String.new
+initialize_program(csv_param)
+play_user_rounds(csv_param)
 finish_program

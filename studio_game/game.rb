@@ -108,6 +108,12 @@ class Game
 		return message
 	end
 
+	def save_high_scores(filename="high_scores.txt")
+		File.open(filename,'w') do |file|
+			file.puts report_high_scores
+		end
+	end
+
 	def play(rounds=1)
 		puts "Starting to play!".center(80,"*")+"\n"
 		puts "Treasures recollection"

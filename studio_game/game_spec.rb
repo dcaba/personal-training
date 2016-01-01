@@ -65,6 +65,7 @@ describe Game do
 			@game = Game.new("Tongo game")
 			@game.add_player(Player.new("Winner", 2000))
 			@game.add_player(Player.new("Loser", 1))
+			@game_output_file="game_spec_save.out"
 		end
 
 		it "prints the winner properly" do
@@ -76,6 +77,12 @@ describe Game do
 			expected_stats << "Tongo game High Scores:\n\tWinner.............. 2000\n\tLoser............... 1\n"
 			expected_stats << "Tongo game Total points:\n\tWinner's point totals:\n\t\t0 grand total points\n\tLoser's point totals:\n\t\t0 grand total points\n"
 			expect(@game.print_stats).to be == expected_stats
+		end
+
+		it "saves the high scores to a file" do
+			expected_stats = "Tongo game High Scores:\n\tWinner.............. 2000\n\tLoser............... 1\n"
+			@game.save_high_scores @game_output_file
+			expect(`cat #{@game_output_file}`).to be == expected_stats
 		end
 	end
 
