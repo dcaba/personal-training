@@ -96,6 +96,18 @@ describe Player do
 			expect(@player).not_to be_strong
 		end
 	end
+	context "created from a csv" do
+		before do
+			@player = Player.from_csv("dani,10")
+		end
+
+		it "has a capitalized name" do
+			expect(@player.name).to be == "Dani"
+		end
+		it "has an initial health" do
+			expect(@player.health).to be == 10
+		end
+	end
 	context "in a collection of players" do
 		before do
 			@player1 = Player.new("moe", 100)

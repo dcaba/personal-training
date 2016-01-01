@@ -11,6 +11,10 @@ class Player
 		@health=rand(200) if health.nil? == true 
 		@found_treasures = Hash.new(0)
 	end
+	def self.from_csv(line)
+		name,health=line.split(",")
+		new(name,Integer(health))
+	end
 
 	def found_treasure(treasure)
 		 @found_treasures[treasure.name] += treasure.points

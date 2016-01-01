@@ -15,7 +15,15 @@ class Game
 	end
 
 	def load_players(players_import)
-		@players = players_import.clone
+		case players_import
+		when Array 
+			@players = players_import.clone
+		when String
+			File.open(players_import) do |file|
+				file.each_line {|line| add_player(Player.from_csv(line))}
+			end	
+		else 
+		end
 	end
 
 	def get_player_by_name(name)

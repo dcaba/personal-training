@@ -10,7 +10,8 @@ def play_user_rounds
 			rounds = answer.to_i
 			game1 rounds
 		       	game2 rounds
-		when "quit" || "exit"
+			game3 rounds
+		when "quit","exit"
 			break
 		else
 			puts "Please enter a number or 'quit'"
@@ -84,6 +85,20 @@ def game2(rounds=1)
 	my_game2.print_players
 	my_game2.play rounds
 	puts "The winner of #{my_game2.title} was... #{my_game2.winner}".center(160,"*")
+end
+
+def game3(rounds=1)
+	players='players.csv'
+	my_game = Game.new "csv game!"
+	my_game.load_players(players)
+	puts "Players have been imported. There are #{my_game.players.size} players in the game"
+
+	puts "Game title: #{my_game.title}"
+	my_game.print_players
+
+	my_game.play rounds
+
+	puts "The winner of #{my_game.title} was... #{my_game.winner}".center(160,"*")
 end
 
 #

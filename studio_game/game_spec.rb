@@ -3,7 +3,6 @@ require_relative 'player'
 require_relative 'die'
 
 describe Game do
-
 	before do
 		$stdout = StringIO.new 
 		@game = Game.new("Knuckleheads")
@@ -99,10 +98,11 @@ describe Game do
 	context "from an imported csv of players" do
 		before do
 			@player_file="game_spec_players.csv"
+			@game = Game.new("csv game")
 			@game.load_players(@player_file)
 		end
 		it "should contain the expected number of players" do
-			expect(@game.players.size).to be == `wc -l #{@player_file}`.to_i
+			expect(@game.players.size).to be == `cat #{@player_file} | wc -l`.to_i
 		end
 	end
 
