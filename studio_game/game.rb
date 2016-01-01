@@ -54,32 +54,36 @@ class Game
 				end
 			end 
 		when "health" 
-			puts "Health report".center(80,"*")
-			@players.each do |player|
-				puts "\t#{player.health}"
-			end
+			puts report_health
 		end
 	end
-	def print_player_health(player)
-		"\t"+"#{player.name}".ljust(20,".")+" #{player.health}\n"
-	end
 
-	def print_player_score(player)
-		"\t"+"#{player.name}".ljust(20,".")+" #{player.score}\n"
+	def report_health
+			message = "Health report".center(80,"*") + "\n"
+			@players.each do |player|
+				message << "\t#{player.health}\n"
+			end
+			return message
 	end
+	private :report_health
+
+	def print_player_for_report(player,param=:health)
+		"\t"+"#{player.name}".ljust(20,".")+" #{player.public_send(param)}\n"
+	end
+	private :print_player_for_report
 
 	def report_strong_wimpy
 		message="#{@title} Statistics:\n"
 		strong,wimpy=@players.partition{|x| x.strong?}
 		message << "\n#{strong.size} strong players:\n"
-		strong.each {|player| message << print_player_health(player)}
+		strong.each {|player| message << print_player_for_report(player,:health)}
 		message << "\n#{wimpy.size} wimpy players:\n"
-		wimpy.each {|player| message << print_player_health(player)}
+		wimpy.each {|player| message << print_player_for_report(player,:health)}
 		return message
 	end
 	def report_high_scores
 		message="#{@title} High Scores:\n"
-		players.sort.each {|player| message << print_player_score(player)}
+		players.sort.each {|player| message << print_player_for_report(player,:score)}
 		return message
 	end
 	def report_per_treasure_points(player)
