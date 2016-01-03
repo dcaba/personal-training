@@ -1,4 +1,5 @@
 require_relative 'player'
+require_relative 'clumsy_player'
 require_relative 'game'
 
 def play_user_rounds(csv_param)
@@ -84,6 +85,7 @@ def game2(rounds=1)
 	rand(50..150).times do
 		my_game2.add_player
 	end
+	rand(1..10).times { |time| my_game2.add_player(ClumsyPlayer.new("-#{time}")) }
 	puts ".. Done"
 
 	puts "Game title: #{my_game2.title}"
@@ -96,6 +98,7 @@ end
 def game3(rounds=1,player_file)
 	my_game = Game.new "csv game!"
 	my_game.load_players(player_file)
+	my_game.add_player(ClumsyPlayer.new("-clumsy"))
 	puts "Players have been imported. There are #{my_game.players.size} players in the game"
 
 	puts "Game title: #{my_game.title}"
