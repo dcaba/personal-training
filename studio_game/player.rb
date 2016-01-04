@@ -1,9 +1,11 @@
 require 'securerandom'
 require_relative 'treasure_trove'
+require_relative 'playable'
 
 class Player
 	attr_reader :health
 	attr_accessor :name
+	include Playable
 
 	def initialize (name=SecureRandom.urlsafe_base64(5), health=rand(1..200))
 		@name = name.capitalize
@@ -35,19 +37,6 @@ class Player
 		"I'm #{@name} with health = #{@health}, points = #{points}, and score = #{score} as of #{time}"
 	end
 
-	def blam()
-		@health -= 10
-		"#{@name} got blammed!"
-	end
-
-	def w00t()
-		@health += 15
-		"#{@name} got w00ted!"
-	end
-
-	def strong?
-		@health > 100
-	end
 	def <=>(x)
 		x.score <=> score
 	end
