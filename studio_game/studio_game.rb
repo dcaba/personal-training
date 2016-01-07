@@ -25,6 +25,7 @@ end
 def initialize_program(csv_param)
 	$init_time = Time.now	
 	csv_param << (ARGV.shift || "players.csv")
+	$rounds = ARGV.shift unless ARGV.size = 0
 	$games = Array.new
 	welcome_message="Game starting at #{time} - invoked with #{csv_param}"
 	puts "".center(80,"#")

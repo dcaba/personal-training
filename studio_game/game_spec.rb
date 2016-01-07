@@ -19,31 +19,31 @@ describe Game do
 	end
 
 	it "increases the health when rolling a high number" do
-		allow_any_instance_of(Die).to receive(:roll).and_return(5)
+		allow_any_instance_of(LoadedDie).to receive(:roll).and_return(5)
 		@game.play
 		tested_player = @game.get_player_by_name("moe")
 		expect(tested_player.health).to be == @initial_health + 15
 	end
 
 	it "decreases the health when rolling low number" do
-		allow_any_instance_of(Die).to receive(:roll).and_return(2)
+		allow_any_instance_of(LoadedDie).to receive(:roll).and_return(2)
 		@game.play
 		tested_player = @game.get_player_by_name("moe")
 		expect(tested_player.health).to be == @initial_health - 10 
 	end
 	it "keeps the health when rolling a mid number" do
-		allow_any_instance_of(Die).to receive(:roll).and_return(4)
+		allow_any_instance_of(LoadedDie).to receive(:roll).and_return(4)
 		@game.play
 		tested_player = @game.get_player_by_name("moe")
 		expect(tested_player.health).to be == @initial_health 
 	end
 
 	it "also introduces the changes properly in a multiround game" do
-		allow_any_instance_of(Die).to receive(:roll).and_return(5)
+		allow_any_instance_of(LoadedDie).to receive(:roll).and_return(5)
 		@game.play 2
-		allow_any_instance_of(Die).to receive(:roll).and_return(1)
+		allow_any_instance_of(LoadedDie).to receive(:roll).and_return(1)
 		@game.play 2
-		allow_any_instance_of(Die).to receive(:roll).and_return(3)
+		allow_any_instance_of(LoadedDie).to receive(:roll).and_return(3)
 		@game.play 4
 		tested_player = @game.get_player_by_name("moe")
 		expect(tested_player.health).to be == @initial_health + 15*2 - 10*2
