@@ -1,7 +1,7 @@
-require_relative 'player'
-require_relative 'clumsy_player'
-require_relative 'berserk_player'
-require_relative 'game'
+require_relative '../lib/studio_game/player'
+require_relative '../lib/studio_game/clumsy_player'
+require_relative '../lib/studio_game/berserk_player'
+require_relative '../lib/studio_game/game'
 
 def play_games
 	$games << game1($rounds)
@@ -29,7 +29,7 @@ end
 def initialize_program()
 	$init_time = Time.now	
 	$parms = ARGV.size
-	$csv_param = (ARGV.shift || "players.csv")
+	$csv_param = (ARGV.shift || File.join(File.dirname(__FILE__),"players.csv"))
 	$rounds = (ARGV.shift.to_i || 1)
 	$games = Array.new
 	welcome_message="Game starting at #{time} - invoked with #{$csv_param} and rounds #{$rounds}"
@@ -44,7 +44,7 @@ def finish_program
 	puts "".center(80,"#")
 	puts bye_message.center(80,"#")
 	puts "".center(80,"#")
-	$games.each {|game| game.save_high_scores "#{game.title}.out"}
+	$games.each {|game| game.save_high_scores File.join(File.dirname(__FILE__),"#{game.title}.out")}
 	puts "stats saved"
 	puts "EXECUTION TIME: #{((Time.now - $init_time)*1000000).to_i} micro-seconds"
 end

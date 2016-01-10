@@ -66,7 +66,7 @@ module StudioGame
 				@game = Game.new("Tongo game")
 				@game.add_player(Player.new("Winner", 2000))
 				@game.add_player(Player.new("Loser", 1))
-				@game_output_file=File.dirname(__FILE__)+"/"+"game_spec_save.out"
+				@game_output_file=File.join(File.dirname(__FILE__),"game_spec_save.out")
 			end
 
 			it "prints the winner properly" do
@@ -105,7 +105,7 @@ module StudioGame
 
 		context "from an imported csv of players" do
 			before do
-				@player_file=File.dirname(__FILE__)+"/"+"game_spec_players.csv"
+				@player_file=File.join(File.dirname(__FILE__),"game_spec_players.csv")
 				@game = Game.new("csv game")
 				@game.load_players(@player_file)
 			end
