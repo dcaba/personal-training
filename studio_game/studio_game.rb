@@ -3,16 +3,20 @@ require_relative 'clumsy_player'
 require_relative 'berserk_player'
 require_relative 'game'
 
-def play_user_rounds(csv_param)
+def play_games
+	$games << game1($rounds)
+	$games << game2($rounds)
+	$games << game3($rounds,$csv_param)
+end
+
+def user_interact()
 	loop do
 		puts "How many game rounds? ('quit' to exit)"
 		answer = gets.chomp.downcase
 		case answer
 		when /^\d+$/
-			rounds = answer.to_i
-			$games << game1(rounds)
-		       	$games << game2(rounds)
-			$games << game3(rounds,csv_param)
+			$rounds = answer.to_i
+			play_games
 		when "quit","exit","q"
 			break
 		else
@@ -22,12 +26,13 @@ def play_user_rounds(csv_param)
 	end
 end
 
-def initialize_program(csv_param)
+def initialize_program()
 	$init_time = Time.now	
-	csv_param << (ARGV.shift || "players.csv")
-	$rounds = ARGV.shift unless ARGV.size = 0
+	$parms = ARGV.size
+	$csv_param = (ARGV.shift || "players.csv")
+	$rounds = (ARGV.shift.to_i || 1)
 	$games = Array.new
-	welcome_message="Game starting at #{time} - invoked with #{csv_param}"
+	welcome_message="Game starting at #{time} - invoked with #{$csv_param} and rounds #{$rounds}"
 	puts "".center(80,"#")
 	puts welcome_message.center(80,"#")
 	puts "".center(80,"#")
@@ -117,7 +122,11 @@ end
 #
 # MAIN
 #
-csv_param = String.new
-initialize_program(csv_param)
-play_user_rounds(csv_param)
+initialize_program()
+case $parms
+when 2
+	play_games
+else	
+	user_interact()
+end
 finish_program
