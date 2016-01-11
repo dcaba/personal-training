@@ -13,4 +13,4 @@ env:
  global:
   - REPO="studio_game"
   - CI_HOME=`pwd`/$REPO
-script: build.sh
+script: rspec_build.sh
