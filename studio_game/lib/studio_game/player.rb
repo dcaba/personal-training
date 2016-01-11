@@ -8,7 +8,7 @@ module StudioGame
 		attr_accessor :name
 		include Playable
 
-		def initialize (name=SecureRandom.urlsafe_base64(5), health=rand(1..200))
+		def initialize (name=SecureRandom.urlsafe_base64(5), health=rand(200))
 			@name = name.capitalize
 			@health = health 
 			@health=rand(200) if health.nil? == true 
