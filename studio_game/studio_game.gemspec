@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
 	s.name         = "dcaba_studio_game"
-	s.version      = "0.1.0"
+	s.version      = "0.1.1"
 	s.author       = "Daniel Caballero"
 	s.email        = "dcaba@github.com"
-	s.homepage     = "http://www.odenum.com"
+	s.homepage     = "https://github.com/dcaba/personal-training/tree/master/studio_game"
 	s.summary      = "Ruby trainig exercise for pragmatic studio"
 	s.description  = File.read(File.join(File.dirname(__FILE__), 'README'))
 	s.licenses     = ['MIT']
