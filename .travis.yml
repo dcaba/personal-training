@@ -7,6 +7,8 @@ rvm:
  - 2.0.0
  - 1.9.3
  - 1.9.2
+gemfile:
+ - studio_game/Gemfile
 env:
  global:
   - REPO="studio_game"
