@@ -1,0 +1,5 @@
+env:
+	global:
+		- REPO="studio_game"
+		- CI_HOME=`pwd`/$REPO
+	script: build.sh
