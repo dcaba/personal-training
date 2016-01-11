@@ -8,7 +8,7 @@ module StudioGame
 			roll
 		end
 		def roll
-			@number=rand(1..6)
+			@number=rand(5)+1
 			audit
 			return @number
 		end
