@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-	s.name         = "pragmatic_studio_game"
+	s.name         = "dcaba_studio_game"
 	s.version      = "0.1.0"
 	s.author       = "Daniel Caballero"
 	s.email        = "dcaba@github.com"
