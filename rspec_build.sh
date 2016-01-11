@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 cd $CI_HOME
 rspec
