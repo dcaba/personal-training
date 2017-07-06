@@ -1,9 +1,7 @@
 # https://www.codewars.com/kata/alphabetic-anagrams/train/ruby
 
 def create_combinations(word)
-	result = Array[]
-	word.split("").permutation.to_a.uniq.sort.each {|elem| result << elem.join() }
-	return result
+	return word.split("").permutation.to_a.sort!.uniq.map! {|elem| elem.join() }
 
 end
 
