@@ -1,11 +1,20 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type game struct {
 	name string
 	gtype gameType
 	players int
+}
+
+func (g game) print()  {
+	fmt.Println("name: ", g.name)
+	fmt.Println("type: ", g.gtype)
+	fmt.Println("players: ", g.players)
+
 }
 
 type gameType struct {
@@ -14,10 +23,10 @@ type gameType struct {
 }
 
 func printGames(games []game)  {
+	fmt.Println("Printing game statistics")
 	for _, eachGame:= range games {
-		fmt.Println("name: ", eachGame.name)
-		fmt.Println("type: ", eachGame.gtype)
-		fmt.Println("players: ", eachGame.players)
+		fmt.Printf("mem address: %p \n", &eachGame)
+		eachGame.print()
 	}
 	return
 
@@ -29,12 +38,21 @@ func main()  {
 	gametype1.description = "Ball based games"
 
 	game1 := game{
-		name:	"Tenis",
-		gtype:	gametype1,
+		name:		"Tenis",
+		gtype:		gametype1,
 		players:	2,
 	}
 
-	parms := []game{game1}
+	game2 := game1
+
+	game3 := &game1
+	game3.players = 10
+
+	parms := []game{
+		game1,
+		game2,
+		*game3,
+	}
 	printGames(parms)
 
 	fmt.Println("bye!")
