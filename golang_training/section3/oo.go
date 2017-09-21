@@ -1,33 +1,36 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+	"strings"
+	"section3/sllnode"
+)
 
-type node interface {
-	setValue(v int)
-	getValue() (int)
+
+func nodeValueSetter(node sllnode.Node)  {
+	node.SetValue(3)
 }
 
-type SLLNode struct {
-	next *SLLNode
-	data int
-}
-
-func (node *SLLNode) setValue(value int) {
-	node.data = value
-	return
-}
-
-func (node *SLLNode) getValue() (value int) {
-	value = node.data
-	return
-}
-
-func newSLLNode() (*SLLNode) {
-	return new(SLLNode)
+func nodeValuePrinter(node sllnode.Node)  {
+	fmt.Println(strings.Repeat("#", 10))
+	fmt.Println("Node type:", reflect.TypeOf(node))
+	fmt.Println("Value:", node.GetValue())
+	fmt.Println(strings.Repeat("#", 10))
 }
 
 func main() {
-	sllNode := new(SLLNode)
-	sllNode.setValue(3)
-	fmt.Println(sllNode.getValue())
+	var node sllnode.Node
+	node = sllnode.NewSLLNode()
+	nodeValueSetter(node)
+	nodeValuePrinter(node)
+
+	node = sllnode.NewPowerNode()
+	nodeValueSetter(node)
+	nodeValuePrinter(node)
+	if pnode, ok := node.(*sllnode.PowerNode); ok {
+		fmt.Println("INFO: powerNode does allow me to get a random value,", pnode.GetRandomValue())
+	}
+
+
 }
