@@ -8,11 +8,11 @@ import (
 func main()  {
 	sll := singlelinkedlist.NewSingleLinkedList()
 	sll.Add(3)
-	fmt.Println(sll.Retrieve())
+	fmt.Println(sll)
 	sll.Add(5)
-	fmt.Println(sll.Retrieve())
+	fmt.Println(sll)
 	sll.Add(7)
-	fmt.Println(sll.Retrieve())
+	fmt.Println(sll)
 	sll.Add(11)
-	fmt.Println(sll.Retrieve())
+	fmt.Println(sll)
 }

@@ -2,6 +2,8 @@ package singlelinkedlist
 
 import (
 	"section3/sllnode"
+	"fmt"
+	"strconv"
 )
 
 type SingleLinkedList struct {
@@ -27,12 +29,23 @@ func (sll *SingleLinkedList) Add(value int) {
 	return
 }
 
-func (sll *SingleLinkedList) Retrieve() (returnSlice []int){
+func (sll *SingleLinkedList) String() (returnString string){
+	sliceOfValues := sll.toSlice()
+	if len(sliceOfValues) < 1 {
+		return ""
+	}
+	for _, elem := range sliceOfValues[:len(sliceOfValues)-1] {
+		returnString = returnString + fmt.Sprintf("%d - ", elem)
+	}
+	return returnString + strconv.Itoa(sliceOfValues[len(sliceOfValues)-1])
+}
+
+func (sll *SingleLinkedList) toSlice() (returnSlice []int){
 	returnSlice = []int{}
 	if sll.head != nil {
 		returnSlice = append(returnSlice, sll.head.GetValue())
 		if sll.next != nil {
-			returnSlice = append(returnSlice, sll.next.Retrieve()...)
+			returnSlice = append(returnSlice, sll.next.toSlice()...)
 		}
 	}
 	return returnSlice
